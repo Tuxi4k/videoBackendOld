@@ -18,6 +18,10 @@
       "@utils/*": ["./utils/*"]
     }
   },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
+  },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist"]
 }

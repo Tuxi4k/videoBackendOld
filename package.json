@@ -2,7 +2,7 @@
   "name": "video-control-backend",
   "version": "0.0.1",
   "description": "Видеоконтроль56.рф бэкенд",
-  "main": "index.ts",
+  "main": "./dist/index.js",
   "author": "Tuxi4k",
   "license": "MIT",
   "dependencies": {
@@ -13,21 +13,17 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "node-telegram-bot-api": "^0.66.0",
-    "nodemailer": "^7.0.6"
+    "nodemailer": "^7.0.6",
+    "prisma": "^6.17.1"
   },
   "type": "module",
   "scripts": {
-    "start": "tsx index.ts",
+    "start": "node ./dist/index.js",
     "dev": "nodemon index.ts",
-    "build": "tsc",
-    "db:actions": "tsx scripts/dbActions.ts",
+    "build": "tsc && tsc-alias && pnpm copy-prisma",
+    "copy-prisma": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/prisma/schema.prisma",
     "db:refresh": "prisma db push --force-reset",
-    "db:generate": "prisma generate",
-    "db:createUser": "tsx scripts/createUser.ts",
-    "db:sanitize": "tsx scripts/dbSanitize.ts",
-    "db:userChange": "tsx scripts/changeUser.ts",
-    "db:userView": "tsx scripts/viewUser.ts",
-    "db:userDelete": "tsx scripts/deleteUser.ts"
+    "db:generate": "prisma generate"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
@@ -35,7 +31,8 @@
     "@types/node-telegram-bot-api": "^0.64.0",
     "@types/nodemailer": "^6.4.0",
     "nodemon": "^3.1.10",
-    "prisma": "^6.16.3",
+    "shx": "^0.4.0",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.20.6",
     "typescript": "^5.9.2"
   }
