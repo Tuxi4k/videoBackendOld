@@ -1,5 +1,5 @@
 # Dependencies
-node_modules/
+node_modules
 
 # Package managers
 .yarn/
@@ -15,4 +15,4 @@ pnpm-lock.yaml
 /prisma/db.sqlite3
 
 # Scripts
-scripts/
+scripts
