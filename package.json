@@ -21,9 +21,9 @@
     "start": "node ./dist/index.js",
     "dev": "nodemon index.ts",
     "build": "tsc && tsc-alias && pnpm copy-prisma",
-    "copy-prisma": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/prisma/schema.prisma",
-    "db_prod:generate": "prisma generate --schema=./dist/prisma/schema.prisma",
-    "db_prod:refresh": "prisma db push --force-reset --schema=./dist/prisma/schema.prisma",
+    "copy-prisma": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/schema.prisma",
+    "db_prod:generate": "prisma generate --schema=./dist/schema.prisma",
+    "db_prod:refresh": "prisma db push --force-reset --schema=./dist/schema.prisma",
     "db:refresh": "prisma db push --force-reset",
     "db:generate": "prisma generate"
   },
