@@ -136,9 +136,8 @@ jobs:
           cd ~/backendApp
           pnpm install --production
           echo "Backend dependencies installed"
-          
-          cd dist
-          echo "${{ secrets.ENV_FILE_PROD }}" > .env
+
+          echo "${{ secrets.ENV_FILE_PROD }}" > ~/backendApp/dist/.env
           pnpm db_prod:generate
           # Перезапускаем сервис (замените на вашу команду)
           # sudo systemctl restart your-backend-service || echo "Service restart skipped"
