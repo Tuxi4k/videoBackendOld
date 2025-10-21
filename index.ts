@@ -11,7 +11,7 @@ const PORT = 3000;
 
 app.use(
   cors({
-    origin: ["http://192.168.1.66"],
+    origin: process.env.CORS_ORIGINS.split(","),
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })

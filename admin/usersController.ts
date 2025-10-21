@@ -9,11 +9,13 @@ import {
 import { verifyToken } from "@/auth/accesMidlware";
 import { loginUser } from "@/auth/loginController";
 import { refreshToken } from "@/auth/refreshTokenRotation";
+// import { logout } from "@/auth/logout";
 
 const userContrRouter = Router();
 
 userContrRouter.post("/login", loginUser);
 userContrRouter.post("/refreshRotation", refreshToken);
+// userContrRouter.post("/logout", logout);
 
 userContrRouter.use(verifyToken);
 
