@@ -15,9 +15,7 @@
     "express-validator": "^7.3.0",
     "jsonwebtoken": "^9.0.2",
     "node-telegram-bot-api": "^0.66.0",
-    "nodemailer": "^7.0.6",
-    "helmet": "^7.1.0",
-    "morgan": "^1.10.0"
+    "nodemailer": "^7.0.6"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
@@ -27,7 +25,6 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/cors": "^2.8.17",
-    "@types/morgan": "^1.9.9",
     "prisma": "^6.17.1",
     "typescript": "^5.9.2",
     "tsx": "^4.20.6",
@@ -38,15 +35,13 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc && tsc-alias && pnpm copy-files",
-    "copy-files": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/schema.prisma",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio",
-    "db:reset": "prisma migrate reset",
-    "db:deploy": "prisma migrate deploy",
-    "clean": "shx rm -rf dist",
-    "type-check": "tsc --noEmit"
+    "build": "tsc && tsc-alias && pnpm copy-prisma",
+    "test": "tsc --noEmit",
+    "copy-prisma": "shx mkdir -p dist/prisma && shx cp prisma/schema.prisma dist/schema.prisma",
+    "db_prod:generate": "prisma generate --schema=./dist/schema.prisma",
+    "db_prod:refresh": "prisma db push --force-reset --schema=./dist/schema.prisma",
+    "db:refresh": "prisma db push --force-reset",
+    "db:generate": "prisma generate"
   },
   "engines": {
     "node": ">=18.0.0"
