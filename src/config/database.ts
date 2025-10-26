@@ -1,12 +1,16 @@
-// src/config/database.ts
-import { PrismaClient } from "@prisma/client";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
+import * as schema from "../database/schema";
 import { logger } from "../utils/logger";
 
-const prisma = new PrismaClient();
+const client = createClient({
+  url: "file:./db.sqlite3",
+});
+
+export const db = drizzle(client, { schema });
 
 export const connectDatabase = async (): Promise<void> => {
   try {
-    await prisma.$connect();
     logger.info("✅ Database connected successfully");
   } catch (error) {
     logger.error("❌ Database connection failed:", error);
@@ -14,4 +18,4 @@ export const connectDatabase = async (): Promise<void> => {
   }
 };
 
-export default prisma;
+export default db;

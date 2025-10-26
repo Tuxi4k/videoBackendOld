@@ -1,7 +1,6 @@
-// src/admin/users/usersController.ts
 import { Request, Response, NextFunction } from "express";
 import { UserRepository } from "@admin/database/userRepository";
-import { Prisma } from "@prisma/client";
+import type { Contact } from "@/database/schema"; // Используем Drizzle типы
 
 export class UsersController {
   private userRepository: UserRepository;
@@ -74,7 +73,7 @@ export class UsersController {
   ): Promise<void> => {
     try {
       const id = parseInt(req.params.id);
-      const updateData: Prisma.ContactUpdateInput = req.body;
+      const updateData: Partial<Contact> = req.body; // Используем Drizzle тип
       const userSaved = await this.userRepository.updateContact(id, updateData);
       res.json({ success: userSaved });
     } catch (error) {

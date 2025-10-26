@@ -1,69 +1,88 @@
-// src/admin/database/userRepository.ts
-import { Prisma } from "@prisma/client";
-import prisma from "@config/database";
-import type { Contact, User, CreateContactData } from "@/types/requests";
+import { db } from "@config/database";
+import {
+  contacts,
+  users,
+  type Contact,
+  type NewContact,
+  type User,
+} from "@/database/schema";
+import { eq } from "drizzle-orm";
+import type { CreateContactData } from "@/types/requests";
 
 export class UserRepository {
   async getContacts(): Promise<Contact[]> {
-    return await prisma.contact.findMany();
+    return await db.select().from(contacts);
   }
 
   async getContact(id: number): Promise<Contact | null> {
-    return await prisma.contact.findUnique({
-      where: { id },
-    });
+    const result = await db.select().from(contacts).where(eq(contacts.id, id));
+    return result[0] || null;
   }
 
   async addContact(contactData: CreateContactData): Promise<boolean> {
-    const newContact = await prisma.contact.create({
-      data: {
+    const result = await db
+      .insert(contacts)
+      .values({
         fio: contactData.fio,
         phone: contactData.phone,
         address: contactData.address,
         house: contactData.house,
         agreement: contactData.agreement,
-        email: contactData.email || null,
-        tags: contactData.tags ? contactData.tags : Prisma.JsonNull,
-      },
-    });
+        email: contactData.email,
+        tags: contactData.tags || {
+          source: "website_form",
+          timestamp: new Date().toISOString(),
+        },
+      })
+      .returning();
 
-    return !!newContact;
+    return result.length > 0;
   }
 
   async updateContact(
     id: number,
-    contactData: Prisma.ContactUpdateInput
+    contactData: Partial<Contact>
   ): Promise<boolean> {
-    const updatedContact = await prisma.contact.update({
-      where: { id },
-      data: contactData,
-    });
+    const result = await db
+      .update(contacts)
+      .set({
+        ...contactData,
+        updatedAt: new Date(),
+      })
+      .where(eq(contacts.id, id))
+      .returning();
 
-    return !!updatedContact;
+    return result.length > 0;
   }
 
   async deleteContact(id: number): Promise<boolean> {
-    const deletedContact = await prisma.contact.delete({
-      where: { id },
-    });
+    const result = await db
+      .delete(contacts)
+      .where(eq(contacts.id, id))
+      .returning();
 
-    return !!deletedContact;
+    return result.length > 0;
   }
 
   // Методы для аутентификации
   async findByUsername(username: string): Promise<User | null> {
-    return await prisma.user.findUnique({
-      where: { username },
-    });
+    const result = await db
+      .select()
+      .from(users)
+      .where(eq(users.username, username));
+    return result[0] || null;
   }
 
   async updateRefreshToken(
     username: string,
     refreshToken: string | null
   ): Promise<void> {
-    await prisma.user.update({
-      where: { username },
-      data: { lastToken: refreshToken },
-    });
+    await db
+      .update(users)
+      .set({
+        lastToken: refreshToken,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.username, username));
   }
 }

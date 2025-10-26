@@ -1,18 +1,6 @@
-// src/types/requests.ts
-import { Prisma } from "@prisma/client";
+import type { Contact, User } from "@/database/schema"; // Drizzle типы
 
-export interface Contact {
-  id: number;
-  email?: string | null;
-  fio: string;
-  agreement: string;
-  phone: string;
-  address: string;
-  house: string;
-  tags?: Prisma.JsonValue | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type { Contact, User };
 
 export interface FormData {
   fio: string;
@@ -30,7 +18,7 @@ export interface CreateContactData {
   house: string;
   agreement: string;
   email?: string;
-  tags?: Prisma.JsonValue;
+  tags?: Record<string, any>;
 }
 
 export interface LoginRequest {
@@ -42,23 +30,12 @@ export interface RefreshTokenRequest {
   refreshToken: string;
 }
 
-export interface User {
-  id: number;
-  username: string;
-  password: string;
-  lastToken: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-// JWT типы
 export interface JwtPayload {
   username: string;
   iat?: number;
   exp?: number;
 }
 
-// Расширяем типы Express
 declare global {
   namespace Express {
     interface Request {

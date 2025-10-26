@@ -1,9 +1,7 @@
-// src/client/form/formService.ts
 import { EmailService } from "@shared/emailService";
 import { TelegramService } from "@shared/telegramService";
 import { UserRepository } from "@admin/database/userRepository";
 import type { FormData, CreateContactData } from "@/types/requests";
-import { Prisma } from "@prisma/client";
 
 export class FormService {
   private emailService: EmailService;
@@ -22,7 +20,6 @@ export class FormService {
       this.emailService.sendFormNotification(formData),
     ]);
 
-    // Преобразуем FormData в CreateContactData
     const contactData: CreateContactData = {
       fio: formData.fio,
       phone: formData.phone,
@@ -33,8 +30,8 @@ export class FormService {
       tags: {
         source: "website_form",
         timestamp: new Date().toISOString(),
-        ip: "unknown", // Можно добавить позже из req.ip
-      } as Prisma.JsonValue,
+        ip: "unknown",
+      },
     };
 
     const userSaved = await this.userRepository.addContact(contactData);
