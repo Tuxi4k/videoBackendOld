@@ -137,7 +137,7 @@ jobs:
           echo "Backend dependencies installed"
 
           echo "${{ secrets.ENV_FILE_PROD }}" > ~/backendApp/.env
-          pnpm db_prod:generate
+          pnpm db:push
           pm2 start videoControlBackend
           echo "Backend deployment completed"
         '
