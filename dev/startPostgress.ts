@@ -15,7 +15,7 @@ import { existsSync } from "fs";
       port: 5432,
       persistent: true,
       initdbFlags: ["--locale=en_US.UTF-8", "--encoding=UTF8"],
-      onLog: () => {},
+      onLog: (message) => console.log("📝 PostgreSQL Log:", message),
       onError: (err) => console.error("❌ PostgreSQL Error:", err),
     });
 
