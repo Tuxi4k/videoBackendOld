@@ -51,6 +51,7 @@ jobs:
         path: |
           dist/
           package.json
+          drizzle.config.js
         retention-days: 1
 
   deploy-with-vpn:
@@ -124,6 +125,7 @@ jobs:
           rm -rf ~/backendApp/node_modules
           rm -f ~/backendApp/pnpm-lock.yaml
           rm -f ~/backendApp/.env
+          rm -f ~/backendApp/drizzle.config.js
           echo "Cleaned and recreated backendApp directory"
         '
         
@@ -137,7 +139,7 @@ jobs:
           echo "Backend dependencies installed"
 
           echo "${{ secrets.ENV_FILE_PROD }}" > ~/backendApp/.env
-          pnpm db_prod:generate
+          pnpm db:push
           pm2 start videoControlBackend
           echo "Backend deployment completed"
         '
