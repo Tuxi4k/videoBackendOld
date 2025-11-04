@@ -1,4 +1,3 @@
-// src/routes/admin/users.ts
 import { Router } from "express";
 import { UsersController } from "../../admin/users/usersController";
 import { verifyToken } from "../../middleware/auth/adminAuth";
