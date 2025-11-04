@@ -1,4 +1,3 @@
-// src/shared/emailService.ts
 import nodemailer from "nodemailer";
 import config from "@/config/constants";
 import { FormData } from "../types/requests";
