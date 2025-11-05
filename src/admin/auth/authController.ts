@@ -1,4 +1,3 @@
-// src/admin/auth/authController.ts
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "./authService";
 
