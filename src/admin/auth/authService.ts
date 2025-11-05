@@ -1,4 +1,3 @@
-// src/admin/auth/authService.ts
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "@config/constants";
