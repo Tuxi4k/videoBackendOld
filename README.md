@@ -116,3 +116,15 @@ MIT License. Подробнее в файле LICENSE.
 - Файл .env используется для всех окружений и должен быть создан вручную
 - Для CI/CD используйте GitHub Secrets для хранения переменных окружения
 - Разработка остановлена на совсем (репозиторий не будет обновляться)
+
+### 📫 **Как со мной связаться?**  
+<div align="center">  
+
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/casherka)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:kaserka.caserca@gmail.com)  
+</div>
+
+#### 💾 Почтовый ящик (легаси способ)
+
+- 📮 kaserka.caserca@gmail.com
+
