@@ -62,10 +62,10 @@ REST API сервис для обработки заявок с отправко
 
 4. Инициализация базы данных:
 
-```bash
-npm run db:generate
-npm run db:push
-```
+	```bash
+	npm run db:generate
+	npm run db:push
+	```
 
 5. 🏃‍♂️ Запуск
 
@@ -89,7 +89,7 @@ npm run db:push
 	
 	```bash
 	npm run dev          # Запуск в режиме разработки
-  npm run dev:db     # запуск postgress embedded
+	npm run dev:db     # запуск postgress embedded
 	npm run build        # Сборка проекта
 	npm start           # Запуск в продакшене
 	npm run test        # Запуск тестовой сборки
